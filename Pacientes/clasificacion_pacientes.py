@@ -49,16 +49,21 @@ model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 
 # 9. Resultados
-print("\nResultados:")
-print("Accuracy:", accuracy_score(y_test, y_pred))
-print("Precision:", precision_score(y_test, y_pred, average='weighted'))
-print("Recall:", recall_score(y_test, y_pred, average='weighted'))
+print("\n=== MÉTRICAS DEL MODELO ===")
+print(f"Accuracy: {accuracy_score(y_test, y_pred):.2f}")
+print(f"Precision: {precision_score(y_test, y_pred, average='weighted'):.2f}")
+print(f"Recall: {recall_score(y_test, y_pred, average='weighted'):.2f}")
 
 # 10. Matriz de confusión
 cm = confusion_matrix(y_test, y_pred)
 
-sns.heatmap(cm, annot=True, fmt='d')
+sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
 plt.title("Matriz de Confusión")
-plt.xlabel("Predicho")
-plt.ylabel("Real")
+plt.xlabel("Predicción")
+plt.ylabel("Valor Real")
 plt.show()
+
+from sklearn.metrics import classification_report
+
+print("\n=== REPORTE COMPLETO ===")
+print(classification_report(y_test, y_pred))
